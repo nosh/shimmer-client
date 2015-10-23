@@ -120,5 +120,18 @@ Shimmer.prototype.getAuths = function(user, cb) {
 	}.bind(this));
 }
 
+Shimmer.prototype.deauthorize = function(shim, user, cb) {
+	var shimmerUri = this.host+'/de-authorize/'+shim+'/'+'?username='+user;
+	console.log("deleting:"+shimmerUri);
+	request.del(shimmerUri, function(err, response) {
+		if (err) {
+			console.log(err);
+			cb(err);
+		} else {
+			cb(null, response);
+		}
+	});
+}
+
 // export the class
 module.exports = Shimmer;
